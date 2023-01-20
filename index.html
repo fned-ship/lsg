@@ -269,6 +269,45 @@
         #footer{
             background-color: antiquewhite; padding: 20px; margin-top: 0px; border-top: 2px solid black; display: flex;  flex-direction: row;  justify-content: space-around;  align-items: center; 
         }
+        
+        /*(((((((((((((((((((((((loder)))))))))))))))))))))))))))*/
+        #loader {
+            border: 12px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 12px solid #444444;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+            z-index: 100;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #center {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            margin: auto;
+            z-index: 99;
+        }
+        #board{
+            background-color: #ababab;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 50;
+        }
+
+        /*((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((*/
+        
         @media screen and (max-width: 800px) {
             #main{
                 width: 100%;
@@ -281,6 +320,11 @@
     </style>
 </head>
 <body>
+    <div id="board" ></div>
+    <div id="center" >
+        <h2 style="text-align: center; margin-bottom: 20px; font-size: 2em;" >wait...</h2>
+        <div id="loader" ></div>
+    </div>
     <div id="main" >
         <div id="header" >
             <h2>welcome to LSG</h2>
@@ -468,6 +512,20 @@
         const Right=document.getElementById('right');
         const Left=document.getElementById('left');
         var cardWidth=200;
+        
+        
+        document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                document.querySelector("#center").style.display = "block";
+                document.querySelector("#board").style.display = "block";
+            } else {
+                document.querySelector("#center").style.display = "none";
+                document.querySelector("#board").style.display = "none";
+            }
+        };
+        //}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+        
+        
         if ( /android|webOS|iPhone|iPad|iPod|blackberry|IEMobile|Opera Mini|Windows Phone/i.test(navigator.userAgent) ){//phone and ipad
 
             r.style.setProperty('--music-main-width',screen.width*0.95+'px');
